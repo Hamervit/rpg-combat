@@ -97,7 +97,7 @@ https://sammancoaching.org/kata_descriptions/rpg_combat.html
 - [X] Si un personaje de tipo guerrero es creado debe tener las estadísticas de un guerrero.
 - [X] Si un personaje de tipo tanque es creado debe tener las estadísticas de un tanque.
 - [X] Si un personaje es creado con un tipo válido debe tener las estadísticas de un personaje de su tipo.
-- [ ] Si un personaje muerto intenta atacar debe arrojar un InvalidOperationException con mensaje Un personaje muerto no puede realizar daño.
+- [X] Si un personaje muerto intenta atacar debe arrojar un InvalidOperationException con mensaje Un personaje muerto no puede realizar daño.
 - [ ] Si un personaje intenta atacar a un personaje no válido debe arrojar un ArgumentNullException.
 - [ ] Si un personaje intenta hacerse daño a si mismo debe arrojar un InvalidOperationException con mensaje No puedes atacarte a ti mismo.
 - [ ] Si un personaje realiza daño a otro personaje debe reducir la vida del personaje atacado en la cantidad de daño teniendo en cuenta la defensa del personaje atacado.

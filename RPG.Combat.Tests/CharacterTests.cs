@@ -105,6 +105,19 @@ public class Personaje
     }
 
 
+    public void RecibirDaño(Personaje atacante)
+    {
+        Health -= atacante.Damage;
+    }
+
+    public void Atacar()
+    {
+        if (ValidarEstadoVidaPersonaje() is false)
+            throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
+    }
+
+    private bool ValidarEstadoVidaPersonaje() => Health > 0;
+
     private void ObtenerStatsBasePorTipo(string type)
     {
         switch (type)
@@ -140,16 +153,5 @@ public class Personaje
                 Healing = 98;
                 break;
         }
-    }
-
-    public void RecibirDaño(Personaje atacante)
-    {
-        Health -= atacante.Damage;
-    }
-
-    public void Atacar()
-    {
-        if (Health <= 0)
-            throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
     }
 }
