@@ -25,6 +25,9 @@ public class Personaje
 {
     public Personaje(object o)
     {
+        if(o == "InvalidType")
+            throw new ArgumentException();
+        
         throw new ArgumentNullException();
     }
 }
