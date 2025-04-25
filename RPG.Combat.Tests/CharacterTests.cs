@@ -90,6 +90,18 @@ public class CharacterTests
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeIntentaHacerseDañoASiMismo_Debe_ArrojarUnInvalidOperationExceptionConMensajeNoPuedesAtacarteATiMismo()
+    {
+        var guerrero = new Personaje("Guerrero");
+
+        var caller = () => guerrero.Atacar(guerrero);
+
+        caller.Should().ThrowExactly<InvalidOperationException>()
+            .WithMessage("No puedes atacarte a ti mismo");
+    }
 }
 
 public class Personaje
