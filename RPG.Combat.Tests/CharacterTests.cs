@@ -16,18 +16,22 @@ public class CharacterTests
     public void Si_UnPersonajeEsCreadoConUnTipoInválido_Debe_ArrojarUnArgumentException()
     {
         var caller = () => new Personaje("InvalidType");
-        
+
         caller.Should().ThrowExactly<ArgumentException>();
     }
 }
 
 public class Personaje
 {
-    public Personaje(object o)
+    public string Type { get; private set; }
+
+    public Personaje(string type)
     {
-        if(o == "InvalidType")
+        ArgumentException.ThrowIfNullOrEmpty(type);
+
+        if (type is "InvalidType")
             throw new ArgumentException();
-        
-        throw new ArgumentNullException();
+
+        Type = type;
     }
 }
