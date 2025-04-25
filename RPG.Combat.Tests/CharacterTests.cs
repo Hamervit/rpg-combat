@@ -11,6 +11,14 @@ public class CharacterTests
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
+
+    [Fact]
+    public void Si_UnPersonajeEsCreadoConUnTipoInválido_Debe_ArrojarUnArgumentException()
+    {
+        var caller = () => new Personaje("InvalidType");
+        
+        caller.Should().ThrowExactly<ArgumentException>();
+    }
 }
 
 public class Personaje
