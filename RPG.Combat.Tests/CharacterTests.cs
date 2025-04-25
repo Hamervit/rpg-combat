@@ -68,11 +68,11 @@ public class CharacterTests
 public class Personaje
 {
     public string Type { get; private set; }
-    public decimal MaxHealth { get; set; }
-    public decimal Damage { get; set; }
-    public decimal Defense { get; set; }
-    public decimal Healing { get; set; }
-    public int Level { get; set; } = 1;
+    public decimal MaxHealth { get; private set; }
+    public decimal Damage { get; private set; }
+    public decimal Defense { get; private set; }
+    public decimal Healing { get; private set; }
+    public int Level { get; private set; } = 1;
 
     public Personaje(string type)
     {
