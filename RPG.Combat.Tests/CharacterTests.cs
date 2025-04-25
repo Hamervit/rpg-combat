@@ -38,7 +38,7 @@ public class CharacterTests
     public void Si_UnPersonajeDeTipoTanqueEsCreado_Debe_TenerLasEstadisticasDeUnTanque()
     {
         var tanque = new Personaje("Tanque");
-        
+
         tanque.Type.Should().Be("Tanque");
         tanque.MaxHealth.Should().Be(1_300);
         tanque.Level.Should().Be(1);
@@ -65,9 +65,19 @@ public class Personaje
             throw new ArgumentException("Tipo de personaje no válido");
 
         Type = type;
-        MaxHealth = 1_150;
-        Damage = 360;
-        Defense = 165;
-        Healing = 63;
+        if (type == "Guerrero")
+        {
+            MaxHealth = 1_150;
+            Damage = 360;
+            Defense = 165;
+            Healing = 63;
+        }
+        else
+        {
+            MaxHealth = 1_300;
+            Damage = 270;
+            Defense = 187.5m;
+            Healing = 56;
+        }
     }
 }
