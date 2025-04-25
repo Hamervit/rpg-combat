@@ -46,6 +46,23 @@ public class CharacterTests
         tanque.Defense.Should().Be(187.5m);
         tanque.Healing.Should().Be(56);
     }
+
+    [Theory]
+    [InlineData("Mago", 900, 270, 187.5, 56)]
+    [InlineData("Asesino", 950, 405, 127.5, 63),]
+    [InlineData("Sanador", 900, 255, 142.5, 98)]
+    public void Si_UnPersonajeEsCreadoConUnTipoValido_Debe_TenerLasEstadisticasDeUnPersonajeDeSuTipo(string type,
+        decimal expectedMaxHealth, decimal expectedDamage, decimal expectedDefense, decimal expectedHealing)
+    {
+        var personaje = new Personaje(type);
+
+        personaje.Type.Should().Be(type);
+        personaje.MaxHealth.Should().Be(expectedMaxHealth);
+        personaje.Damage.Should().Be(expectedDamage);
+        personaje.Defense.Should().Be(expectedDefense);
+        personaje.Healing.Should().Be(expectedHealing);
+        personaje.Level.Should().Be(1);
+    }
 }
 
 public class Personaje
@@ -65,19 +82,44 @@ public class Personaje
             throw new ArgumentException("Tipo de personaje no válido");
 
         Type = type;
-        if (type is "Guerrero")
+
+        ObtenerStatsBasePorTipo(type);
+    }
+
+    private void ObtenerStatsBasePorTipo(string type)
+    {
+        switch (type)
         {
-            MaxHealth = 1_150;
-            Damage = 360;
-            Defense = 165;
-            Healing = 63;
-        }
-        else
-        {
-            MaxHealth = 1_300;
-            Damage = 270;
-            Defense = 187.5m;
-            Healing = 56;
+            case "Guerrero":
+                MaxHealth = 1_150;
+                Damage = 360;
+                Defense = 165;
+                Healing = 63;
+                break;
+            case "Tanque":
+                MaxHealth = 1_300;
+                Damage = 270;
+                Defense = 187.5m;
+                Healing = 56;
+                break;
+            case "Mago":
+                MaxHealth = 900;
+                Damage = 270;
+                Defense = 187.5m;
+                Healing = 56;
+                break;
+            case "Asesino":
+                MaxHealth = 950;
+                Damage = 405;
+                Defense = 127.5m;
+                Healing = 63;
+                break;
+            case "Sanador":
+                MaxHealth = 900;
+                Damage = 255;
+                Defense = 142.5m;
+                Healing = 98;
+                break;
         }
     }
 }
