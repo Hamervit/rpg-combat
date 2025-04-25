@@ -137,6 +137,9 @@ public class Personaje
     {
         ArgumentNullException.ThrowIfNull(personaje);
 
+        if (this == personaje)
+            throw new InvalidOperationException("No puedes atacarte a ti mismo");
+
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
     }
