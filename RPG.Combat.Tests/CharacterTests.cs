@@ -79,6 +79,17 @@ public class CharacterTests
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("Un personaje muerto no puede realizar daño");
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeIntentaAtacarAUnPersonajeNoValido_Debe_ArrojarUnArgumentNullExceptionConMensajeDebeExistirUnPersonajeAQuienAtacar()
+    {
+        var guerrero = new Personaje("Guerrero");
+
+        var caller = () => guerrero.RecibirDaño(null!);
+
+        caller.Should().ThrowExactly<ArgumentNullException>();
+    }
 }
 
 public class Personaje
