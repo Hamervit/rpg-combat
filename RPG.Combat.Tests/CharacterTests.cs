@@ -74,7 +74,7 @@ public class CharacterTests
         guerrero.RecibirDaño(asesino);
         guerrero.RecibirDaño(asesino);
 
-        var caller = () => guerrero.Atacar();
+        var caller = () => guerrero.Atacar(asesino);
 
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("Un personaje muerto no puede realizar daño");
@@ -82,11 +82,11 @@ public class CharacterTests
 
     [Fact]
     public void
-        Si_UnPersonajeIntentaAtacarAUnPersonajeNoValido_Debe_ArrojarUnArgumentNullExceptionConMensajeDebeExistirUnPersonajeAQuienAtacar()
+        Si_UnPersonajeIntentaAtacarAUnPersonajeNoValido_Debe_ArrojarUnArgumentNullException()
     {
         var guerrero = new Personaje("Guerrero");
 
-        var caller = () => guerrero.RecibirDaño(null!);
+        var caller = () => guerrero.Atacar(null!);
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
@@ -121,8 +121,10 @@ public class Personaje
         Health -= atacante.Damage;
     }
 
-    public void Atacar()
+    public void Atacar(Personaje personaje)
     {
+        ArgumentNullException.ThrowIfNull(personaje);
+
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
     }
