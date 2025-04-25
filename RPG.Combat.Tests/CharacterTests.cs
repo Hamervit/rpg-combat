@@ -35,15 +35,6 @@ public class CharacterTests
     }
 }
 
-public abstract class PersonajeBase
-{
-    protected decimal MaxHealth { get; set; } = 1_000;
-    protected decimal Damage { get; set; } = 300;
-    protected decimal Defense { get; set; } = 150;
-    protected decimal Healing { get; set; } = 70;
-    protected int Level { get; set; } = 1;
-}
-
 public class Personaje
 {
     public string Type { get; private set; }
@@ -61,5 +52,9 @@ public class Personaje
             throw new ArgumentException("Tipo de personaje no válido");
 
         Type = type;
+        MaxHealth = 1_150;
+        Damage = 360;
+        Defense = 165;
+        Healing = 63;
     }
 }
