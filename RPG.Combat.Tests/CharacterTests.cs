@@ -51,10 +51,10 @@ public class CharacterTests
 public class Personaje
 {
     public string Type { get; private set; }
-    public decimal MaxHealth { get; set; } = 1_000;
-    public decimal Damage { get; set; } = 300;
-    public decimal Defense { get; set; } = 150;
-    public decimal Healing { get; set; } = 70;
+    public decimal MaxHealth { get; set; }
+    public decimal Damage { get; set; }
+    public decimal Defense { get; set; }
+    public decimal Healing { get; set; }
     public int Level { get; set; } = 1;
 
     public Personaje(string type)
@@ -65,7 +65,7 @@ public class Personaje
             throw new ArgumentException("Tipo de personaje no válido");
 
         Type = type;
-        if (type == "Guerrero")
+        if (type is "Guerrero")
         {
             MaxHealth = 1_150;
             Damage = 360;
