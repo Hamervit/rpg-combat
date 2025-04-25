@@ -94,7 +94,7 @@ https://sammancoaching.org/kata_descriptions/rpg_combat.html
 ## Test list
 - [X] Si un personaje es creado sin tipo debe arrojar un ArgumentNullException.
 - [X] Si un personaje es creado con un tipo inválido debe arrojar un ArgumentException.
-- [ ] Si un personaje de tipo guerrero es creado debe tener las estadísticas de un guerrero.
+- [X] Si un personaje de tipo guerrero es creado debe tener las estadísticas de un guerrero.
 - [ ] Si un personaje de tipo tanque es creado debe tener las estadísticas de un tanque.
 - [ ] Si un personaje es creado con un tipo valido debe tener las estadísticas de un personaje de su tipo.
 - [ ] Si un personaje muerto intenta atacar debe arrojar un InvalidOperationException con mensaje Un personaje muerto no puede realizar daño.

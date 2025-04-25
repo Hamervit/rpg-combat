@@ -33,6 +33,19 @@ public class CharacterTests
         guerrero.Defense.Should().Be(165);
         guerrero.Healing.Should().Be(63);
     }
+
+    [Fact]
+    public void Si_UnPersonajeDeTipoTanqueEsCreado_Debe_TenerLasEstadisticasDeUnTanque()
+    {
+        var tanque = new Personaje("Tanque");
+        
+        tanque.Type.Should().Be("Tanque");
+        tanque.MaxHealth.Should().Be(1_300);
+        tanque.Level.Should().Be(1);
+        tanque.Damage.Should().Be(270);
+        tanque.Defense.Should().Be(187.5m);
+        tanque.Healing.Should().Be(56);
+    }
 }
 
 public class Personaje
