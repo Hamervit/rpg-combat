@@ -17,6 +17,6 @@ public class Personaje
 {
     public Personaje(object o)
     {
-        throw new NotImplementedException();
+        throw new ArgumentNullException();
     }
 }
