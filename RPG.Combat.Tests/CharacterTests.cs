@@ -71,6 +71,8 @@ public class CharacterTests
         var guerrero = new Personaje("Guerrero");
         var asesino = new Personaje("Asesino");
         guerrero.RecibirDaño(asesino);
+        guerrero.RecibirDaño(asesino);
+        guerrero.RecibirDaño(asesino);
 
         var caller = () => guerrero.Atacar();
 
@@ -82,6 +84,7 @@ public class CharacterTests
 public class Personaje
 {
     public string Type { get; private set; }
+    public decimal Health { get; private set; }
     public decimal MaxHealth { get; private set; }
     public decimal Damage { get; private set; }
     public decimal Defense { get; private set; }
@@ -95,10 +98,12 @@ public class Personaje
         if (type is "InvalidType")
             throw new ArgumentException("Tipo de personaje no válido");
 
-        Type = type;
-
         ObtenerStatsBasePorTipo(type);
+
+        Type = type;
+        Health = MaxHealth;
     }
+
 
     private void ObtenerStatsBasePorTipo(string type)
     {
@@ -137,13 +142,14 @@ public class Personaje
         }
     }
 
-    public void RecibirDaño(Personaje asesino)
+    public void RecibirDaño(Personaje atacante)
     {
-        throw new NotImplementedException();
+        Health -= atacante.Damage;
     }
 
     public void Atacar()
     {
-        throw new NotImplementedException();
+        if (Health <= 0)
+            throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
     }
 }
