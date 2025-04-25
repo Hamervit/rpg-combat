@@ -63,6 +63,20 @@ public class CharacterTests
         personaje.Healing.Should().Be(expectedHealing);
         personaje.Level.Should().Be(1);
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeMuertoIntentaAtacar_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeRealizarDaño()
+    {
+        var guerrero = new Personaje("Guerrero");
+        var asesino = new Personaje("Asesino");
+        guerrero.RecibirDaño(asesino);
+
+        var caller = () => guerrero.Atacar();
+
+        caller.Should().ThrowExactly<InvalidOperationException>()
+            .WithMessage("Un personaje muerto no puede realizar daño");
+    }
 }
 
 public class Personaje
@@ -121,5 +135,15 @@ public class Personaje
                 Healing = 98;
                 break;
         }
+    }
+
+    public void RecibirDaño(Personaje asesino)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Atacar()
+    {
+        throw new NotImplementedException();
     }
 }
