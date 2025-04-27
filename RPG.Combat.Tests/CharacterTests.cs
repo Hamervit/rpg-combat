@@ -148,4 +148,16 @@ public class CharacterTests
 
         sanador.Health.Should().Be(735.5m);
     }
+
+    [Theory]
+    [InlineData(TipoPersonaje.Guerrero, 1_150)]
+    public void Si_UnPersonajeRecienCreadoIntentaCurarseASiMismoSuVida_NoDebe_SerMayorASuVidaMaxima(TipoPersonaje tipo,
+        decimal expectedHealth)
+    {
+        var guerrero = new Personaje(tipo);
+
+        guerrero.Curar();
+
+        guerrero.Health.Should().Be(expectedHealth);
+    }
 }
