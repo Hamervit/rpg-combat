@@ -26,6 +26,8 @@ public class Personaje
 
     public void RecibirDaño(Personaje atacante)
     {
+        ArgumentNullException.ThrowIfNull(atacante);
+
         Health -= Math.Abs(Defense - atacante.Damage);
     }
 
