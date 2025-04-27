@@ -49,7 +49,7 @@ public class CharacterTests
     }
 
     [Theory]
-    [InlineData("Mago", 900, 270, 187.5, 56)]
+    [InlineData("Mago", 900, 375, 135, 77)]
     [InlineData("Asesino", 950, 405, 127.5, 63),]
     [InlineData("Sanador", 900, 255, 142.5, 98)]
     public void Si_UnPersonajeEsCreadoConUnTipoValido_Debe_TenerLasEstadisticasDeUnPersonajeDeSuTipo(string type,
