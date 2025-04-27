@@ -64,9 +64,9 @@ public class Personaje
                 break;
             case "Mago":
                 MaxHealth = 900;
-                Damage = 270;
-                Defense = 187.5m;
-                Healing = 56;
+                Damage = 375;
+                Defense = 135m;
+                Healing = 77;
                 break;
             case "Asesino":
                 MaxHealth = 950;
