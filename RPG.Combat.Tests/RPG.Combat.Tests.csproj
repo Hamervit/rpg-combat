@@ -19,4 +19,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\RPG.Combat.Dominio\RPG.Combat.Dominio.csproj" />
+    </ItemGroup>
+
 </Project>
