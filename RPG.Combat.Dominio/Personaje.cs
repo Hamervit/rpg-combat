@@ -85,7 +85,9 @@ public class Personaje
 
     public void Curar()
     {
-        if (ValidarEstadoVidaPersonaje() is false) 
+        if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede curarse");
+
+        Health += Healing;
     }
 }
