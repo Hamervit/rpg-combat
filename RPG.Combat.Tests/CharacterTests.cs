@@ -117,4 +117,14 @@ public class CharacterTests
 
         guerrero.Health.Should().Be(910);
     }
+
+    [Fact]
+    public void Si_UnPersonajeRecibeDañoDeUnPersonajeInvalido_Debe_ArrojarUnArgumentNullException()
+    {
+        var guerrero = new Personaje("Guerrero");
+
+        var caller = () => guerrero.RecibirDaño(null!);
+
+        caller.Should().ThrowExactly<ArgumentNullException>();
+    }
 }
