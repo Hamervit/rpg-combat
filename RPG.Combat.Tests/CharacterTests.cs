@@ -6,18 +6,10 @@ namespace RPG.Combat.Tests;
 public class CharacterTests
 {
     [Fact]
-    public void Si_UnPersonajeEsCreadoSinTipo_Debe_ArrojarUnArgumentNullException()
-    {
-        var caller = () => new Personaje(null!);
-
-        caller.Should().ThrowExactly<ArgumentNullException>();
-    }
-
-    [Fact]
     public void
         Si_UnPersonajeEsCreadoConUnTipoInválido_Debe_ArrojarUnArgumentExceptionConMensajeTipoDePersonajeNoValido()
     {
-        var caller = () => new Personaje("InvalidType");
+        var caller = () => new Personaje((TipoPersonaje)(99));
 
         caller.Should().ThrowExactly<ArgumentException>().WithMessage("Tipo de personaje no válido");
     }
@@ -25,9 +17,9 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeDeTipoGuerreroEsCreado_Debe_TenerLasEstadisticasDeUnGuerrero()
     {
-        var guerrero = new Personaje("Guerrero");
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
 
-        guerrero.Type.Should().Be("Guerrero");
+        guerrero.Type.Should().Be(TipoPersonaje.Guerrero);
         guerrero.MaxHealth.Should().Be(1_150);
         guerrero.Level.Should().Be(1);
         guerrero.Damage.Should().Be(360);
@@ -38,9 +30,9 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeDeTipoTanqueEsCreado_Debe_TenerLasEstadisticasDeUnTanque()
     {
-        var tanque = new Personaje("Tanque");
+        var tanque = new Personaje(TipoPersonaje.Tanque);
 
-        tanque.Type.Should().Be("Tanque");
+        tanque.Type.Should().Be(TipoPersonaje.Tanque);
         tanque.MaxHealth.Should().Be(1_300);
         tanque.Level.Should().Be(1);
         tanque.Damage.Should().Be(270);
@@ -49,10 +41,10 @@ public class CharacterTests
     }
 
     [Theory]
-    [InlineData("Mago", 900, 375, 135, 77)]
-    [InlineData("Asesino", 950, 405, 127.5, 63),]
-    [InlineData("Sanador", 900, 255, 142.5, 98)]
-    public void Si_UnPersonajeEsCreadoConUnTipoValido_Debe_TenerLasEstadisticasDeUnPersonajeDeSuTipo(string type,
+    [InlineData(TipoPersonaje.Mago, 900, 375, 135, 77)]
+    [InlineData(TipoPersonaje.Asesino, 950, 405, 127.5, 63),]
+    [InlineData(TipoPersonaje.Sanador, 900, 255, 142.5, 98)]
+    public void Si_UnPersonajeEsCreadoConUnTipoValido_Debe_TenerLasEstadisticasDeUnPersonajeDeSuTipo(TipoPersonaje type,
         decimal expectedMaxHealth, decimal expectedDamage, decimal expectedDefense, decimal expectedHealing)
     {
         var personaje = new Personaje(type);
@@ -69,8 +61,8 @@ public class CharacterTests
     public void
         Si_UnPersonajeMuertoIntentaAtacar_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeRealizarDaño()
     {
-        var guerrero = new Personaje("Guerrero");
-        var asesino = new Personaje("Asesino");
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+        var asesino = new Personaje(TipoPersonaje.Asesino);
         guerrero.RecibirDaño(asesino);
         guerrero.RecibirDaño(asesino);
         guerrero.RecibirDaño(asesino);
@@ -87,7 +79,7 @@ public class CharacterTests
     public void
         Si_UnPersonajeIntentaAtacarAUnPersonajeNoValido_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje("Guerrero");
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
 
         var caller = () => guerrero.Atacar(null!);
 
@@ -98,7 +90,7 @@ public class CharacterTests
     public void
         Si_UnPersonajeIntentaHacerseDañoASiMismo_Debe_ArrojarUnInvalidOperationExceptionConMensajeNoPuedesAtacarteATiMismo()
     {
-        var guerrero = new Personaje("Guerrero");
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
 
         var caller = () => guerrero.Atacar(guerrero);
 
@@ -110,8 +102,8 @@ public class CharacterTests
     public void
         Si_UnPersonajeRealizaDañoAOtroPersonaje_Debe_ReducirLaVidaDelPersonajeAtacadoEnLaCantidadDeDañoTeniendoEnCuentaLaDefensaDelPersonajeAtacado()
     {
-        var asesino = new Personaje("Asesino");
-        var guerrero = new Personaje("Guerrero");
+        var asesino = new Personaje(TipoPersonaje.Asesino);
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
 
         asesino.Atacar(guerrero);
 
@@ -121,7 +113,7 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeRecibeDañoDeUnPersonajeInvalido_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje("Guerrero");
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
 
         var caller = () => guerrero.RecibirDaño(null!);
 
@@ -132,8 +124,8 @@ public class CharacterTests
     public void
         Si_UnPersonajeMuertoIntentaCurarse_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeCurarse()
     {
-        var sanador = new Personaje("Sanador");
-        var asesino = new Personaje("Asesino");
+        var sanador = new Personaje(TipoPersonaje.Sanador);
+        var asesino = new Personaje(TipoPersonaje.Asesino);
         sanador.RecibirDaño(asesino);
         sanador.RecibirDaño(asesino);
         sanador.RecibirDaño(asesino);
@@ -148,8 +140,8 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeIntentaCurarseASiMismo_Debe_AumentarSuVidaEnLaCantidadDeCuracion()
     {
-        var sanador = new Personaje("Sanador");
-        var asesino = new Personaje("Asesino");
+        var sanador = new Personaje(TipoPersonaje.Sanador);
+        var asesino = new Personaje(TipoPersonaje.Asesino);
         sanador.RecibirDaño(asesino);
 
         sanador.Curar();
