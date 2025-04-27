@@ -101,7 +101,7 @@ https://sammancoaching.org/kata_descriptions/rpg_combat.html
 - [X] Si un personaje intenta atacar a un personaje no válido debe arrojar un ArgumentNullException.
 - [X] Si un personaje intenta hacerse daño a si mismo debe arrojar un InvalidOperationException con mensaje No puedes atacarte a ti mismo.
 - [X] Si un personaje realiza daño a otro personaje debe reducir la vida del personaje atacado en la cantidad de daño teniendo en cuenta la defensa del personaje atacado.
-- [ ] Si un personaje recibe daño de un personaje inválido debe arrojar un ArgumentNullException.
+- [X] Si un personaje recibe daño de un personaje inválido debe arrojar un ArgumentNullException.
 - [ ] Si un personaje muerto intenta curarse debe arrojar un InvalidOperationException con mensaje Un personaje muerto no puede curarse.
 - [ ] Si un personaje intenta curarse a si mismo debe aumentar su vida en la cantidad de curación.
 - [ ] Si un personaje recién creado intenta curarse a si mismo su vida no debe ser mayor a su vida maxima.

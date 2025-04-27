@@ -127,4 +127,20 @@ public class CharacterTests
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeMuertoIntentaCurarse_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeCurarse()
+    {
+        var sanador = new Personaje("Sanador");
+        var asesino = new Personaje("Asesino");
+        sanador.RecibirDaño(asesino);
+        sanador.RecibirDaño(asesino);
+        sanador.RecibirDaño(asesino);
+
+        var caller = () => sanador.Curar();
+
+        caller.Should().ThrowExactly<InvalidOperationException>()
+            .WithMessage("Un personaje muerto no puede curarse");
+    }
 }

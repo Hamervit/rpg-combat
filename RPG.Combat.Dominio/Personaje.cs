@@ -82,4 +82,9 @@ public class Personaje
                 break;
         }
     }
+
+    public object Curar()
+    {
+        throw new NotImplementedException();
+    }
 }
