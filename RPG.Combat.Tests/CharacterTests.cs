@@ -137,6 +137,7 @@ public class CharacterTests
         sanador.RecibirDaño(asesino);
         sanador.RecibirDaño(asesino);
         sanador.RecibirDaño(asesino);
+        sanador.RecibirDaño(asesino);
 
         var caller = () => sanador.Curar();
 

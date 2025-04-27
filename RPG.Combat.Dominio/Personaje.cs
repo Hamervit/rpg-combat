@@ -83,8 +83,9 @@ public class Personaje
         }
     }
 
-    public object Curar()
+    public void Curar()
     {
-        throw new NotImplementedException();
+        if (ValidarEstadoVidaPersonaje() is false) 
+            throw new InvalidOperationException("Un personaje muerto no puede curarse");
     }
 }
