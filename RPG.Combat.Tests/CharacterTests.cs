@@ -73,6 +73,8 @@ public class CharacterTests
         guerrero.RecibirDaño(asesino);
         guerrero.RecibirDaño(asesino);
         guerrero.RecibirDaño(asesino);
+        guerrero.RecibirDaño(asesino);
+        guerrero.RecibirDaño(asesino);
 
         var caller = () => guerrero.Atacar(asesino);
 
@@ -112,7 +114,7 @@ public class CharacterTests
 
         asesino.Atacar(guerrero);
 
-        guerrero.Health.Should().Be(745);
+        guerrero.Health.Should().Be(910);
     }
 }
 
@@ -142,7 +144,7 @@ public class Personaje
 
     public void RecibirDaño(Personaje atacante)
     {
-        Health -= atacante.Damage;
+        Health -= Math.Abs(Defense - atacante.Damage);
     }
 
     public void Atacar(Personaje personaje)
@@ -154,6 +156,8 @@ public class Personaje
 
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede realizar daño");
+
+        personaje.RecibirDaño(this);
     }
 
     private bool ValidarEstadoVidaPersonaje() => Health > 0;
