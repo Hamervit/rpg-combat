@@ -102,6 +102,18 @@ public class CharacterTests
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("No puedes atacarte a ti mismo");
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeRealizaDañoAOtroPersonaje_Debe_ReducirLaVidaDelPersonajeAtacadoEnLaCantidadDeDañoTeniendoEnCuentaLaDefensaDelPersonajeAtacado()
+    {
+        var asesino = new Personaje("Asesino");
+        var guerrero = new Personaje("Guerrero");
+
+        asesino.Atacar(guerrero);
+
+        guerrero.Health.Should().Be(745);
+    }
 }
 
 public class Personaje
