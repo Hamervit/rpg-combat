@@ -144,4 +144,16 @@ public class CharacterTests
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("Un personaje muerto no puede curarse");
     }
+
+    [Fact]
+    public void Si_UnPersonajeIntentaCurarseASiMismo_Debe_AumentarSuVidaEnLaCantidadDeCuracion()
+    {
+        var sanador = new Personaje("Sanador");
+        var asesino = new Personaje("Asesino");
+        sanador.RecibirDaño(asesino);
+
+        sanador.Curar();
+
+        sanador.Health.Should().Be(735.5m);
+    }
 }
