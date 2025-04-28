@@ -174,4 +174,14 @@ public class CharacterTests
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
+
+    [Fact]
+    public void Si_UnPersonajeSeUneAUnaFaccion_Debe_PertenecerAEsaFaccion()
+    {
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+
+        guerrero.UnirseAFaccion("Los Guerreros");
+
+        guerrero.Factions.Should().BeEquivalentTo(["Los Guerreros"]);
+    }
 }

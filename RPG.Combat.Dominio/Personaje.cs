@@ -9,6 +9,7 @@ public class Personaje
     public decimal Defense { get; private set; }
     public decimal Healing { get; private set; }
     public int Level { get; private set; } = 1;
+    public string[] Factions { get; private set; }
 
     public Personaje(TipoPersonaje type)
     {
