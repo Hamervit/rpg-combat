@@ -94,8 +94,8 @@ public class Personaje
             Health += Healing;
     }
 
-    public object UnirseAFaccion(object o)
+    public void UnirseAFaccion(string faccion)
     {
-        throw new NotImplementedException();
+        ArgumentException.ThrowIfNullOrEmpty(faccion);
     }
 }
