@@ -87,6 +87,16 @@ public class Personaje
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede curarse");
 
+        if (personaje != null)
+        {
+            var esAliado = Factions.Any(faccion => personaje.Factions.Contains(faccion));
+
+            if (esAliado)
+            {
+                personaje.Health += Healing;
+            }
+        }
+        
         var healthWithHealing = Health + Healing;
 
         if (healthWithHealing > MaxHealth)
