@@ -99,6 +99,9 @@ public class Personaje
     {
         ArgumentException.ThrowIfNullOrEmpty(faccion);
 
+        if (Factions.Contains(faccion))
+            throw new InvalidOperationException($"El personaje ya pertenece a la facción");
+
         Factions.Add(faccion);
     }
 }
