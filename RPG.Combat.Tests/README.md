@@ -106,7 +106,7 @@ https://sammancoaching.org/kata_descriptions/rpg_combat.html
 - [X] Si un personaje intenta curarse a si mismo debe aumentar su vida en la cantidad de curación.
 - [X] Si un personaje recién creado intenta curarse a si mismo su vida no debe ser mayor a su vida maxima.
 - [X] Si un personaje intenta unirse a una facción inválida debe arrojar un ArgumentNullException.
-- [ ] Si un personaje se une a una facción debe pertenecer a esa facción.
+- [X] Si un personaje se une a una facción debe pertenecer a esa facción.
 - [ ] Si un personaje intenta unirse a una facción a la que ya pertenece debe arrojar un InvalidOperationException con mensaje El personaje ya pertenece a la facción.
 - [ ] Si un personaje intenta abandonar una facción inválida debe arrojar un ArgumentNullException.
 - [ ] Si un personaje intenta abandonar una facción a la que no pertenece debe arrojar un InvalidOperationException con mensaje El personaje no pertenece a la facción.

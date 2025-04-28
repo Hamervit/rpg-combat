@@ -184,4 +184,17 @@ public class CharacterTests
 
         guerrero.Factions.Should().BeEquivalentTo(["Los Guerreros"]);
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeIntentaUnirseAUnaFaccionALaQueYaPertenece_Debe_ArrojarUnInvalidOperationExceptionConMensajeElPersonajeYaPerteneceALaFaccion()
+    {
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+        guerrero.UnirseAFaccion("Los Guerreros");
+
+        var caller = () => guerrero.UnirseAFaccion("Los Guerreros");
+
+        caller.Should().ThrowExactly<InvalidOperationException>()
+            .WithMessage("El personaje ya pertenece a la facción");
+    }
 }
