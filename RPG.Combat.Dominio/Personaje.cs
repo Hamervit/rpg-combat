@@ -86,7 +86,12 @@ public class Personaje
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede curarse");
 
-        Health += Healing;
+        var healthWithHealing = Health + Healing;
+
+        if (healthWithHealing > MaxHealth)
+            Health = MaxHealth;
+        else
+            Health += Healing;
     }
 }
 
