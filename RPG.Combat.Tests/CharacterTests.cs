@@ -5,6 +5,9 @@ namespace RPG.Combat.Tests;
 
 public class CharacterTests
 {
+    private readonly Personaje _guerrero = new(TipoPersonaje.Guerrero);
+    private readonly Personaje _asesino = new(TipoPersonaje.Asesino);
+
     [Fact]
     public void
         Si_UnPersonajeEsCreadoConUnTipoInválido_Debe_ArrojarUnArgumentExceptionConMensajeTipoDePersonajeNoValido()
@@ -17,14 +20,12 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeDeTipoGuerreroEsCreado_Debe_TenerLasEstadisticasDeUnGuerrero()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        guerrero.Type.Should().Be(TipoPersonaje.Guerrero);
-        guerrero.MaxHealth.Should().Be(1_150);
-        guerrero.Level.Should().Be(1);
-        guerrero.Damage.Should().Be(360);
-        guerrero.Defense.Should().Be(165);
-        guerrero.Healing.Should().Be(63);
+        _guerrero.Type.Should().Be(TipoPersonaje.Guerrero);
+        _guerrero.MaxHealth.Should().Be(1_150);
+        _guerrero.Level.Should().Be(1);
+        _guerrero.Damage.Should().Be(360);
+        _guerrero.Defense.Should().Be(165);
+        _guerrero.Healing.Should().Be(63);
     }
 
     [Fact]
@@ -61,15 +62,13 @@ public class CharacterTests
     public void
         Si_UnPersonajeMuertoIntentaAtacar_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeRealizarDaño()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-        var asesino = new Personaje(TipoPersonaje.Asesino);
-        guerrero.RecibirDaño(asesino);
-        guerrero.RecibirDaño(asesino);
-        guerrero.RecibirDaño(asesino);
-        guerrero.RecibirDaño(asesino);
-        guerrero.RecibirDaño(asesino);
+        _guerrero.RecibirDaño(_asesino);
+        _guerrero.RecibirDaño(_asesino);
+        _guerrero.RecibirDaño(_asesino);
+        _guerrero.RecibirDaño(_asesino);
+        _guerrero.RecibirDaño(_asesino);
 
-        var caller = () => guerrero.Atacar(asesino);
+        var caller = () => _guerrero.Atacar(_asesino);
 
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("Un personaje muerto no puede realizar daño");
@@ -79,9 +78,7 @@ public class CharacterTests
     public void
         Si_UnPersonajeIntentaAtacarAUnPersonajeNoValido_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.Atacar(null!);
+        var caller = () => _guerrero.Atacar(null!);
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
@@ -90,9 +87,7 @@ public class CharacterTests
     public void
         Si_UnPersonajeIntentaHacerseDañoASiMismo_Debe_ArrojarUnInvalidOperationExceptionConMensajeNoPuedesAtacarteATiMismo()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.Atacar(guerrero);
+        var caller = () => _guerrero.Atacar(_guerrero);
 
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("No puedes atacarte a ti mismo");
@@ -102,20 +97,15 @@ public class CharacterTests
     public void
         Si_UnPersonajeRealizaDañoAOtroPersonaje_Debe_ReducirLaVidaDelPersonajeAtacadoEnLaCantidadDeDañoTeniendoEnCuentaLaDefensaDelPersonajeAtacado()
     {
-        var asesino = new Personaje(TipoPersonaje.Asesino);
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+        _asesino.Atacar(_guerrero);
 
-        asesino.Atacar(guerrero);
-
-        guerrero.Health.Should().Be(910);
+        _guerrero.Health.Should().Be(910);
     }
 
     [Fact]
     public void Si_UnPersonajeRecibeDañoDeUnPersonajeInvalido_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.RecibirDaño(null!);
+        var caller = () => _guerrero.RecibirDaño(null!);
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
@@ -125,11 +115,11 @@ public class CharacterTests
         Si_UnPersonajeMuertoIntentaCurarse_Debe_ArrojarUnInvalidOperationExceptionConMensajeUnPersonajeMuertoNoPuedeCurarse()
     {
         var sanador = new Personaje(TipoPersonaje.Sanador);
-        var asesino = new Personaje(TipoPersonaje.Asesino);
-        sanador.RecibirDaño(asesino);
-        sanador.RecibirDaño(asesino);
-        sanador.RecibirDaño(asesino);
-        sanador.RecibirDaño(asesino);
+
+        sanador.RecibirDaño(_asesino);
+        sanador.RecibirDaño(_asesino);
+        sanador.RecibirDaño(_asesino);
+        sanador.RecibirDaño(_asesino);
 
         var caller = () => sanador.Curar();
 
@@ -141,8 +131,8 @@ public class CharacterTests
     public void Si_UnPersonajeIntentaCurarseASiMismo_Debe_AumentarSuVidaEnLaCantidadDeCuracion()
     {
         var sanador = new Personaje(TipoPersonaje.Sanador);
-        var asesino = new Personaje(TipoPersonaje.Asesino);
-        sanador.RecibirDaño(asesino);
+
+        sanador.RecibirDaño(_asesino);
 
         sanador.Curar();
 
@@ -158,19 +148,17 @@ public class CharacterTests
     public void Si_UnPersonajeRecienCreadoIntentaCurarseASiMismoSuVida_NoDebe_SerMayorASuVidaMaxima(TipoPersonaje tipo,
         decimal expectedHealth)
     {
-        var guerrero = new Personaje(tipo);
+        var personaje = new Personaje(tipo);
 
-        guerrero.Curar();
+        personaje.Curar();
 
-        guerrero.Health.Should().Be(expectedHealth);
+        personaje.Health.Should().Be(expectedHealth);
     }
 
     [Fact]
     public void Si_UnPersonajeIntentaUnirseAUnaFaccionInvalida_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.UnirseAFaccion(null!);
+        var caller = () => _guerrero.UnirseAFaccion(null!);
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
@@ -178,21 +166,18 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeSeUneAUnaFaccion_Debe_PertenecerAEsaFaccion()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+        _guerrero.UnirseAFaccion("Los Guerreros");
 
-        guerrero.UnirseAFaccion("Los Guerreros");
-
-        guerrero.Factions.Should().BeEquivalentTo(["Los Guerreros"]);
+        _guerrero.Factions.Should().BeEquivalentTo(["Los Guerreros"]);
     }
 
     [Fact]
     public void
         Si_UnPersonajeIntentaUnirseAUnaFaccionALaQueYaPertenece_Debe_ArrojarUnInvalidOperationExceptionConMensajeElPersonajeYaPerteneceALaFaccion()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-        guerrero.UnirseAFaccion("Los Guerreros");
+        _guerrero.UnirseAFaccion("Los Guerreros");
 
-        var caller = () => guerrero.UnirseAFaccion("Los Guerreros");
+        var caller = () => _guerrero.UnirseAFaccion("Los Guerreros");
 
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("El personaje ya pertenece a la facción");
@@ -201,9 +186,7 @@ public class CharacterTests
     [Fact]
     public void Si_UnPersonajeIntentaAbandonarUnaFaccionInvalida_Debe_ArrojarUnArgumentNullException()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.AbandonarFaccion(null!);
+        var caller = () => _guerrero.AbandonarFaccion(null!);
 
         caller.Should().ThrowExactly<ArgumentNullException>();
     }
@@ -212,9 +195,7 @@ public class CharacterTests
     public void
         Si_UnPersonajeIntentaAbandonarUnaFaccionALaQueNoPertenece_Debe_ArrojarUnInvalidOperationExceptionConMensajeElPersonajeNoPerteneceALaFaccion()
     {
-        var guerrero = new Personaje(TipoPersonaje.Guerrero);
-
-        var caller = () => guerrero.AbandonarFaccion("Los Guerreros");
+        var caller = () => _guerrero.AbandonarFaccion("Los Guerreros");
 
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("El personaje no pertenece a la facción");
