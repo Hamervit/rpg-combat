@@ -200,4 +200,14 @@ public class CharacterTests
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("El personaje no pertenece a la facción");
     }
+
+    [Fact]
+    public void Si_UnPersonajeAbandonaUnaFaccion_Debe_DejarDePertenecerAEsaFaccion()
+    {
+        _guerrero.UnirseAFaccion("Los guerreros");
+
+        _guerrero.AbandonarFaccion("Los guerreros");
+
+        _guerrero.Factions.Should().BeEmpty();
+    }
 }
