@@ -94,12 +94,3 @@ public class Personaje
             Health += Healing;
     }
 }
-
-public enum TipoPersonaje
-{
-    Guerrero,
-    Tanque,
-    Mago,
-    Asesino,
-    Sanador
-}

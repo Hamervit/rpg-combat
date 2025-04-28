@@ -151,6 +151,10 @@ public class CharacterTests
 
     [Theory]
     [InlineData(TipoPersonaje.Guerrero, 1_150)]
+    [InlineData(TipoPersonaje.Tanque, 1_300)]
+    [InlineData(TipoPersonaje.Mago, 900)]
+    [InlineData(TipoPersonaje.Asesino, 950)]
+    [InlineData(TipoPersonaje.Sanador, 900)]
     public void Si_UnPersonajeRecienCreadoIntentaCurarseASiMismoSuVida_NoDebe_SerMayorASuVidaMaxima(TipoPersonaje tipo,
         decimal expectedHealth)
     {
