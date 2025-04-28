@@ -7,6 +7,7 @@ public class CharacterTests
 {
     private readonly Personaje _guerrero = new(TipoPersonaje.Guerrero);
     private readonly Personaje _asesino = new(TipoPersonaje.Asesino);
+    private readonly Personaje _sanador = new(TipoPersonaje.Sanador);
 
     [Fact]
     public void
@@ -209,5 +210,18 @@ public class CharacterTests
         _guerrero.AbandonarFaccion("Los guerreros");
 
         _guerrero.Factions.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void
+        Si_UnPersonajeIntentaCurarAOtroYPertenecenALaMismaFaccion_Debe_AumentarLaVidaDelPersonajeCuradoEnLaCantidadDeCuracion()
+    {
+        _sanador.UnirseAFaccion("Los Escarlatas");
+        _asesino.UnirseAFaccion("Los Escarlatas");
+        _asesino.RecibirDaño(_guerrero);
+
+        _sanador.Curar(_asesino);
+
+        _asesino.Health.Should().Be(815.5m);
     }
 }

@@ -82,7 +82,7 @@ public class Personaje
         }
     }
 
-    public void Curar()
+    public void Curar(Personaje? personaje = null)
     {
         if (ValidarEstadoVidaPersonaje() is false)
             throw new InvalidOperationException("Un personaje muerto no puede curarse");
@@ -112,7 +112,7 @@ public class Personaje
 
         if (Factions.Contains(faccion) is false)
             throw new InvalidOperationException("El personaje no pertenece a la facción");
-        
+
         Factions.Remove(faccion);
     }
 }
