@@ -27,7 +27,7 @@ public class Personaje
     {
         ArgumentNullException.ThrowIfNull(atacante);
 
-        Health -= Math.Abs(Defense - atacante.Damage);
+        Health = Math.Max(0, Health - Math.Abs(Defense - atacante.Damage));
     }
 
     public void Atacar(Personaje personaje)
