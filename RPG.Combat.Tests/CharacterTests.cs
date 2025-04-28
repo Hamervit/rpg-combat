@@ -224,4 +224,14 @@ public class CharacterTests
 
         _asesino.Health.Should().Be(815.5m);
     }
+
+    [Fact]
+    public void
+        Si_UnPersonajeIntentaCurarAOtroYNoPertenecenALaMismaFaccion_Debe_ArrojarUnInvalidOperationExceptionConMensajeNoPuedesCurarAUnPersonajeQueNoPerteneceATuFaccion()
+    {
+        var caller = () => _sanador.Curar(_asesino);
+
+        caller.Should().ThrowExactly<InvalidOperationException>()
+            .WithMessage("No puedes curar a un personaje que no pertenece a tu facción");
+    }
 }
