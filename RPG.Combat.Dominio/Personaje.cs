@@ -106,8 +106,8 @@ public class Personaje
     }
 
 
-    public object AbandonarFaccion(object o)
+    public void AbandonarFaccion(string faccion)
     {
-        throw new NotImplementedException();
+        ArgumentException.ThrowIfNullOrEmpty(faccion);
     }
 }
