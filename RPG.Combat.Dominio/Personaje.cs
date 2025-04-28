@@ -95,8 +95,12 @@ public class Personaje
             {
                 personaje.Health += Healing;
             }
+            else
+            {
+                throw new InvalidOperationException("No puedes curar a un personaje que no pertenece a tu facción");
+            }
         }
-        
+
         var healthWithHealing = Health + Healing;
 
         if (healthWithHealing > MaxHealth)
