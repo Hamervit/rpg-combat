@@ -197,4 +197,14 @@ public class CharacterTests
         caller.Should().ThrowExactly<InvalidOperationException>()
             .WithMessage("El personaje ya pertenece a la facción");
     }
+
+    [Fact]
+    public void Si_UnPersonajeIntentaAbandonarUnaFaccionInvalida_Debe_ArrojarUnArgumentNullException()
+    {
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+
+        var caller = () => guerrero.AbandonarFaccion(null!);
+
+        caller.Should().ThrowExactly<ArgumentNullException>();
+    }
 }

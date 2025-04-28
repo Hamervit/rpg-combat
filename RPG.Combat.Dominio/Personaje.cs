@@ -104,4 +104,10 @@ public class Personaje
 
         Factions.Add(faccion);
     }
+
+
+    public object AbandonarFaccion(object o)
+    {
+        throw new NotImplementedException();
+    }
 }
