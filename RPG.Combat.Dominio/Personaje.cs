@@ -103,10 +103,7 @@ public class Personaje
 
         var healthWithHealing = Health + Healing;
 
-        if (healthWithHealing > MaxHealth)
-            Health = MaxHealth;
-        else
-            Health += Healing;
+        Health = Math.Min(healthWithHealing, MaxHealth);
     }
 
     public void UnirseAFaccion(string faccion)
