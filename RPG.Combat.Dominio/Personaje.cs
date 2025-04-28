@@ -112,5 +112,7 @@ public class Personaje
 
         if (Factions.Contains(faccion) is false)
             throw new InvalidOperationException("El personaje no pertenece a la facción");
+        
+        Factions.Remove(faccion);
     }
 }
