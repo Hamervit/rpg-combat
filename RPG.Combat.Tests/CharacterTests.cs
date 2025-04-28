@@ -164,4 +164,14 @@ public class CharacterTests
 
         guerrero.Health.Should().Be(expectedHealth);
     }
+
+    [Fact]
+    public void Si_UnPersonajeIntentaUnirseAUnaFaccionInvalida_Debe_ArrojarUnArgumentNullException()
+    {
+        var guerrero = new Personaje(TipoPersonaje.Guerrero);
+
+        var caller = () => guerrero.UnirseAFaccion(null!);
+
+        caller.Should().ThrowExactly<ArgumentNullException>();
+    }
 }

@@ -93,4 +93,9 @@ public class Personaje
         else
             Health += Healing;
     }
+
+    public object UnirseAFaccion(object o)
+    {
+        throw new NotImplementedException();
+    }
 }
