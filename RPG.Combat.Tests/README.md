@@ -113,3 +113,4 @@ https://sammancoaching.org/kata_descriptions/rpg_combat.html
 - [X] Si un personaje abandona una facción debe dejar de pertenecer a esa facción.
 - [X] Si un personaje intenta curar a otro y pertenecen a la misma facción debe aumentar la vida del personaje curado en la cantidad de curación.
 - [X] Si un personaje intenta curar a otro y no pertenecen a la misma facción debe arrojar un InvalidOperationException con mensaje No puedes curar a un personaje que no pertenece a tu facción.
+- [ ] Si un personaje muere debe su vida ser 0.
